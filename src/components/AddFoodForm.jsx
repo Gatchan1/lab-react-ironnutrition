@@ -7,7 +7,9 @@ function AddFoodForm(props) {
     const [calories, setCalories] = useState("");
     const [servings, setServings] = useState("");
 
-    const nameHandler = (e) => setName(e.target.value)
+    const [textshowButton, setTextShowButton] = useState("Show Form") /* <-- iteration 7!! */
+
+    const nameHandler = (e) => setName(e.target.value) // estas en realidad me las debería ahorrar declararlas y simplemente poner el "contenido" en los onChange correspondientes.
     const imageHandler = (e) => setImage(e.target.value)
     const caloriesHandler = (e) => setCalories(e.target.value)
     const servingsHandler = (e) => setServings(e.target.value)
@@ -19,12 +21,22 @@ function AddFoodForm(props) {
 
         // console.log("new foooood: ", newFood)
         props.addFood(newFood)
-
     }
+
+
+    const showFormHandler = () => {
+        if (textshowButton === "Hide Form") {
+            setTextShowButton("Show Form")
+        } else if (textshowButton === "Show Form") {
+            setTextShowButton("Hide Form")
+        }        
+    }           
 
 
     return(
     <div className='addFoodForm'>
+    {textshowButton === "Hide Form" &&
+        <form>
         <label>Name: </label>
         <Input name="name" value={name} type="text" onChange={nameHandler} />
         <label>Image: </label>
@@ -34,6 +46,9 @@ function AddFoodForm(props) {
         <label>Servings: </label>
         <Input name="servings" value={servings} type="number" onChange={servingsHandler} />
         <button onClick={addFoodHandler}>Add new food</button>
+        </form>
+    }
+        <button onClick={showFormHandler}>{textshowButton}</button>
     </div>
     )
 }

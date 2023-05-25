@@ -1,8 +1,14 @@
 import { Card, Col, Button } from 'antd';
 
 // Iteration 2
-function FoodBox({food}) {
+function FoodBox({food, deleteHandler}) {
     const {name, image, calories, servings} = food
+
+    const deleteFood = () => {
+      deleteHandler(name)
+    } // resulta que soy: listísima!!! He conseguido hacer todo lo del botón de delete sin apenas mirar lo de Mariona dilooooo! 
+    
+
   return (
     // <Col>
       <Card
@@ -15,7 +21,7 @@ function FoodBox({food}) {
         <p>
           <b>Total Calories: {calories * servings} </b> kcal
         </p>
-        <Button type="primary"> Delete </Button>
+        <Button onClick={deleteFood} type="primary"> Delete </Button>
       </Card>
     // </Col>
   );

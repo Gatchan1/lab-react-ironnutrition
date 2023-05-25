@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './App.css';
-import foods from './foods.json';
+import foods from './foods.json'; // This "foods" can be named anything; it doesn't need to match the name of the file.
 import FoodBox from './components/FoodBox';
 import AddFoodForm from './components/AddFoodForm';
 import Search from './components/Search';
@@ -20,12 +20,18 @@ function App() {
     setFoodList(foundFood);
   }
 
+  const deleteFood = (foodNameToDelete) => {
+    let filteredFood = foodList.filter(food => food.name != foodNameToDelete);
+
+    setFoodList(filteredFood)
+  }
+
   return (
     <div className="App">
-    <h1>Food App</h1>
+    <h1 style={{textAlign: "center"}}>Food App</h1>
     <Search searchFood={searchFoodFunction}/>
       <div className="foodList">
-      {foodList.map((fooditem, k) => <FoodBox key={k} food={fooditem} />)}      
+      {foodList.map((fooditem, k) => <FoodBox key={k} food={fooditem} deleteHandler={deleteFood} />)}      
       </div>
       <AddFoodForm addFood={addNewFood} />
     </div>
